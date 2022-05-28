@@ -1,0 +1,4 @@
+3.	Reżyserzy filmów, w których grał Hugo Weaving 
+
+MATCH (hugo:Person {name: "Hugo Weaving"})-[:ACTED_IN]->(m)<-[:DIRECTED]-(dir:Person)
+RETURN dir

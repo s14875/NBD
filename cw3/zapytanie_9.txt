@@ -1,0 +1,34 @@
+9. Zestaw zapytań powodujących uzupełnienie bazy danych o film Captain America: The First Avenger wraz z uzupełnieniem informacji o reżyserze, scenarzystach i odtwórcach głównych ról (w oparciu o skrócone informacje z IMDB - http://www.imdb.com/title/tt0458339/) + zapytanie pokazujące dodany do bazy film wraz odtwórcami głównych ról, scenarzystą i reżyserem. Plik SVG ma pokazywać wynik ostatniego zapytania.  
+
+
+CREATE (FirstAvenger:Movie {title:'Captain America: The First Avenger', released:2011, tagline:'America good, Nazi bad'})
+
+CREATE (Chris:Person {name:'Chris Evans', born:1981})
+CREATE (Hayley:Person {name:'Hayley Atwell', born:1982})
+CREATE (Sebastian:Person {name:'Sebastian Stan ', born:1982})
+CREATE (Lee:Person {name:'Tommy Lee Jones ', born:1946})
+CREATE (Tucci:Person {name:'Stanley Tucci ', born:1960})
+CREATE (Joe:Person {name:'Joe Johnston', born:1950})
+CREATE (Markus:Person {name:'Christopher Markus', born:1970})
+CREATE (McFeely:Person {name:'Stephen McFeely', born:1970})
+
+CREATE
+(Chris)-[:ACTED_IN {roles:['Captain America','Steve Rogers']}]->(FirstAvenger),
+(Hayley)-[:ACTED_IN {roles:['Peggy Carter']}]->(FirstAvenger),
+(Sebastian)-[:ACTED_IN {roles:['Bucky']}]->(FirstAvenger),
+(Lee)-[:ACTED_IN {roles:['Colonel Chester Phillips']}]->(FirstAvenger),
+(Tucci)-[:ACTED_IN {roles:['Dr. Abraham Erskine']}]->(FirstAvenger),
+(Joe)-[:DIRECTED]->(FirstAvenger),
+(Markus)-[:WROTE]->(FirstAvenger),
+(McFeely)-[:WROTE]->(FirstAvenger)
+
+=======
+
+MATCH (Hugo:Person {name: "Hugo Weaving"})
+MATCH (FirstAvenger:Movie {title: "Captain America: The First Avenger"})
+CREATE
+(Hugo)-[:ACTED_IN {roles:['Johann Schmidt','Red Skull']}]->(FirstAvenger)
+
+=====
+
+MATCH (p:Person)-[r]->(m:Movie {title:"Captain America: The First Avenger"}) RETURN p,m
