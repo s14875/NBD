@@ -1,0 +1,8 @@
+10.	Znajdź najtańszą trasę łączącą 3 różne porty lotnicze
+
+MATCH p = (first:Airport)-[:FLIES]->(second:Airport)-[:FLIES]->(third:Airport) 
+WHERE first<>third
+WITH p, REDUCE(x = 0, r IN relationships(p) | x + r.price) AS total_cost
+ORDER BY total_cost ASC 
+LIMIT 1
+RETURN p, total_cost

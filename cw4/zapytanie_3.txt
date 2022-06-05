@@ -1,0 +1,6 @@
+3.	Uszereguj trasy którymi można dostać się z Darjeeling na Sandakphu według dystansu 
+
+MATCH p = (d:town {name: 'Darjeeling'} )-[*..7]->(s:peak {name: 'Sandakphu'})
+WITH p, REDUCE(x = 0, r IN relationships(p) | x + r.distance) AS p_distance 
+ORDER BY p_distance ASC 
+RETURN p, p_distance

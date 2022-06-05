@@ -1,0 +1,10 @@
+4.	Znajdź wszystkie miejsca do których można dotrzeć przy pomocy roweru (twowheeler) z Darjeeling latem
+
+MATCH p = (d:town {name: 'Darjeeling'})-[:twowheeler*]->(target)
+WHERE all(r IN relationships(p) WHERE r.summer = "true")
+RETURN target
+
+
+=====
+
+brak wyników!

@@ -1,0 +1,18 @@
+9.	Uszereguj linie lotnicze według ilości miast, pomiędzy którymi oferują połączenia (unikalnych miast biorących udział w relacjach :ORIGIN i :DESTINATION węzłów typu Flight obsługiwanych przez daną linię) 
+
+CALL{
+	MATCH p = (from:Airport)<-[:ORIGIN]-(f:Flight)-[:DESTINATION]->(to:Airport)
+	WITH ID(from) AS idFrom, ID(to) AS idTo, f.airline AS line
+	WHERE idFrom < idTo
+	WITH DISTINCT [idFrom, idTo] as ids, line
+	RETURN ids, line
+	UNION
+	MATCH p = (from:Airport)<-[:ORIGIN]-(f:Flight)-[:DESTINATION]->(to:Airport)
+	WITH ID(from) AS idFrom, ID(to) AS idTo, f.airline AS line
+	WHERE idFrom > idTo
+	WITH DISTINCT [idTo, idFrom] as ids, line
+	RETURN ids, line
+}
+WITH count(ids) AS uniquePaths, line
+ORDER BY uniquePaths DESC
+RETURN uniquePaths, line

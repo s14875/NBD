@@ -1,0 +1,14 @@
+6.	Znajdź wszystkie porty lotnicze, do których da się dolecieć (bezpośrednio lub z przesiadkami) z Los Angeles (LAX) wydając mniej niż 3000 
+
+MATCH (from:Airport)<-[:ORIGIN]-(f:Flight)-[:DESTINATION]->(to:Airport)
+WITH *
+MATCH (t:Ticket)-[:ASSIGN]->(f)
+WITH from, to, t.price as cost, t.class as standard
+CREATE
+(from)-[:FLIES {price: cost, class: standard}]->(to)
+
+MATCH p = (la:Airport {name:"LAX"})-[:FLIES *..3]->(a:Airport)
+WHERE a.name<>"LAX" 
+WITH p, a, REDUCE(x = 0, r IN relationships(p) | x + r.price) AS total_cost
+WHERE total_cost<3000
+RETURN DISTINCT a

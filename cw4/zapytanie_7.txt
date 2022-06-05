@@ -1,0 +1,11 @@
+7.	Uszereguj połączenia, którymi można dotrzeć z Los Angeles (LAX) do Dayton (DAY) według ceny biletów 
+
+MATCH p = (la:Airport {name:"LAX"})-[:FLIES *..4]->(da:Airport {name:"DAY"}) 
+WITH p, REDUCE(x = 0, r IN relationships(p) | x + r.price) AS total_cost
+ORDER BY total_cost ASC 
+RETURN p, total_cost
+
+
+=====
+
+brak wyników! 
