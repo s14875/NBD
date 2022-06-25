@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+X-Riak-Vclock: a85hYGBgzGDKBVI8+xkWvlc+L+0AZDNnMCUy5rEyeK7XvsOXBQA=
+Vary: Accept-Encoding
+Server: MochiWeb/1.1 WebMachine/1.10.9 (cafe not found)
+Link: </buckets/s14875>; rel="up"
+Last-Modified: Sat, 25 Jun 2022 16:09:45 GMT
+ETag: "3f9ZTPiMr40yIf3qMt80It"
+Date: Sat, 25 Jun 2022 16:10:39 GMT
+Content-Type: application/json
+Content-Length: 91
+
+{"title": "Dzieci z Bullerbyn", "authors": ["Astrid Lindgren"], "year":1947, "price":10.5 }
